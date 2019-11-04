@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from '../logo.svg';
 import {
   BrowserRouter as Router,
@@ -8,12 +8,13 @@ import {
 } from 'react-router-dom'
 
 
-import '../App.css';
+import '../styles/App.css';
 
 
-import SignIn from './SignIn'
+import LogIn from './LogIn'
+import SignUp from './SignUp'
 
-const fakeAuth = {
+/* const fakeAuth = {
   isAuthenticated: false,
   authenticate(cb) {
     this.isAuthenticated = true;
@@ -23,12 +24,13 @@ const fakeAuth = {
     this.isAuthenticated = false;
     setTimeout(cb, 100)
   }
-}
+} */
 
 const publicPage = () => <div>public</div>
 const protectedPage = () => <div>protected</div>
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false)
   return (
     <div className="App">
       <header className="App-header">
@@ -37,7 +39,7 @@ function App() {
         </p>
       </header>
       <div>
-        <SignIn />
+        <SignUp />
       </div>
     </div>
   );
