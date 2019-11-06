@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import login from '../utils/auth/LogInUtil';
+// import login from '../redux/actions/auth/logInUser';
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -93,7 +93,7 @@ export default function SignIn() {
             onClick={async (e) => {
               console.log('email: ', email)
               console.log('password: ', password)
-              console.log(await login(email, password))
+              // console.log(await login(email, password))
             }}
           >
             Log In

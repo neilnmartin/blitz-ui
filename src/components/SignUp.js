@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import signup from '../utils/auth/SignUpUtil'
+import signup from '../redux/actions/auth/signUpUser'
 
 function Copyright() {
   return (
@@ -53,7 +53,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
+  console.log('props: ',props)
   const classes = useStyles();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -69,7 +70,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          Sign Up
+          Create An Account
         </Typography>
         <form className={classes.form} noValidate>
         <TextField
