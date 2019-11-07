@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import signup from '../redux/actions/auth/signUpUser'
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -53,9 +51,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignUp(props) {
-  console.log('props: ',props)
+export default function SignUp({ setLogin }) {
   const classes = useStyles();
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
@@ -146,7 +144,7 @@ export default function SignUp(props) {
               console.log(password)
               console.log(firstName)
               console.log(lastName)
-              console.log(await signup(email, username, password, firstName, lastName))
+              // console.log(await signup(email, username, password, firstName, lastName))
             }}
           >
             Sign Up
@@ -158,7 +156,7 @@ export default function SignUp(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="body2" onClick={() => setLogin(true)}>
                 {"Already have an account? Log In"}
               </Link>
             </Grid>
