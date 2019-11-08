@@ -25,9 +25,7 @@ function Root() {
   return (
     <Provider store={store}>
       <Router>
-        <Route exact path="/">
-          <App/>
-        </Route>
+        <App/>
       </Router>
     </Provider>
   );

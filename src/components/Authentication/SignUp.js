@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { NavLink } from "react-router-dom";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -71,28 +73,34 @@ export default function SignUp({ setLogin }) {
           Create An Account
         </Typography>
         <form className={classes.form} noValidate>
-        <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="firstName"
-            label="First Name"
-            id="firstName"
-            autoComplete="current-first-name"
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="lastName"
-            label="Last Name"
-            id="lastName"
-            autoComplete="current-last-name"
-            onChange={(e) => setLastName(e.target.value)}
-          />
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="firstName"
+                label="First Name"
+                id="firstName"
+                autoComplete="current-first-name"
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="lastName"
+                label="Last Name"
+                id="lastName"
+                autoComplete="current-last-name"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </Grid>
+          </Grid>
           <TextField
             variant="outlined"
             margin="normal"
@@ -156,9 +164,9 @@ export default function SignUp({ setLogin }) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" onClick={() => setLogin(true)}>
-                {"Already have an account? Log In"}
-              </Link>
+              <NavLink to={`/auth/login`}>
+                  {"Already have an account? Log In"}
+              </NavLink>
             </Grid>
           </Grid>
         </form>

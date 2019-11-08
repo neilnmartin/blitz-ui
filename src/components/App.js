@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
-  NavLink,
   Route,
-  Redirect,
   Switch
 } from "react-router-dom";
 
 import "../styles/App.css";
 
+import PrivateRoute from './Authentication/PrivateRoute'
 import Auth from './Authentication/Auth'
+import Dashboard from './Dashboard'
 
 function App() {
   return (
@@ -22,6 +22,9 @@ function App() {
         <Route path="/auth">
           <Auth />
         </Route>
+        <PrivateRoute path="/">
+          <Dashboard />
+        </PrivateRoute>
       </Switch>
     </div>
   );

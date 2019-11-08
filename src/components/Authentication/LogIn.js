@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { NavLink, useRouteMatch } from "react-router-dom";
+
 // import login from '../redux/actions/auth/logInUser';
 
 const useStyles = makeStyles(theme => ({
@@ -42,6 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function LogIn({ setLogin }) {
   const classes = useStyles();
+  let { path, url } = useRouteMatch();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -105,9 +108,9 @@ export default function LogIn({ setLogin }) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2" onClick={() => setLogin(false)}>
+              <NavLink to={`/auth/signup`}>
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </form>

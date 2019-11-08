@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Login from './LogIn'
 import SignUp from './SignUp'
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 export default function Auth() {
-  const [login, setLogin] = useState(true)
+  let { path } = useRouteMatch();
   return (
     <div>
-      {
-        login
-          ? <Login setLogin={setLogin.bind(this)} />
-          : <SignUp setLogin={setLogin.bind(this)} />
-      }
+      <Switch>
+        <Route exact path={`${path}/login`}>
+          <Login />
+        </Route>
+        <Route exact path={`${path}/signup`}>
+          <SignUp />
+        </Route>
+      </Switch>
     </div>
   )
 }
