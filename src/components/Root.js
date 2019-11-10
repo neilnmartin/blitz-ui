@@ -1,27 +1,11 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  NavLink,
-  Route,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-
 import App from './App'
 
 import store from '../redux/store/store'
 
-function TestRouteComponent() {
-  return (
-    <div>
-      TEST ROUTE COMPONENT
-    </div>
-  )
-}
-
-
-function Root() {
+export default function Root() {
   return (
     <Provider store={store}>
       <Router>
@@ -30,5 +14,3 @@ function Root() {
     </Provider>
   );
 }
-
-export default Root;
