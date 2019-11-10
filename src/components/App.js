@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  BrowserRouter as Router,
   Route,
   Switch
 } from "react-router-dom";
@@ -16,7 +15,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <p>b l i t z</p> */}
-        <span><img src="/favicon.ico"/>LITZ</span>
+        <span><img src="/favicon.ico" alt="blitz-logo"/>LITZ</span>
       </header>
       <Switch>
         <Route path="/auth">

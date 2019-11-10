@@ -51,7 +51,7 @@ export default function LogIn({ setLogin }) {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <div className={classes.paper}>
+      {/* <div className={classes.paper}> */}
         {/* <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar> */}
@@ -114,7 +114,7 @@ export default function LogIn({ setLogin }) {
             </Grid>
           </Grid>
         </form>
-      </div>
+      {/* </div> */}
     </Container>
   );
 }
