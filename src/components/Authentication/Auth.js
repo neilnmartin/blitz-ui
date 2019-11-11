@@ -26,7 +26,7 @@ export default function Auth() {
   let { path } = useRouteMatch();
   return (
     <div>
-      <Card>
+      {/* <Card> */}
         <Switch>
           <Route exact path={`${path}/login`}>
             <Login />
@@ -35,7 +35,7 @@ export default function Auth() {
             <SignUp />
           </Route>
         </Switch>
-      </Card>
+      {/* </Card> */}
       <Box mt={8}>
         <Copyright />
       </Box>
