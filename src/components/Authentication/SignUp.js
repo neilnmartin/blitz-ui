@@ -8,8 +8,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { connect } from "react-redux";
 
 import { NavLink } from "react-router-dom";
 import { signupUser } from "../../redux/actions/actionCreators";
@@ -39,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({ setLogin }) => {
+const SignUp = ({ handleSignup }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -58,7 +60,15 @@ const SignUp = ({ setLogin }) => {
         <Typography component="h1" variant="h5">
           Create An Account
         </Typography>
-        <form className={classes.form} noValidate>
+        <form 
+          className={classes.form} 
+          noValidate
+          onSubmit={e => {
+            e.preventDefault()
+            console.log(firstName, lastName, email, username, password)
+            handleSignup(firstName, lastName, email, username, password)
+          }}
+        >
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -133,13 +143,6 @@ const SignUp = ({ setLogin }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={async e => {
-              console.log(email);
-              console.log(password);
-              console.log(firstName);
-              console.log(lastName);
-              // console.log(await signup(email, username, password, firstName, lastName))
-            }}
           >
             Sign Up
           </Button>

@@ -15,7 +15,7 @@ import Container from "@material-ui/core/Container";
 
 import { connect } from "react-redux";
 
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import { loginUser } from "../../redux/actions/actionCreators";
 
 // import login from '../redux/actions/auth/logInUser';
@@ -45,89 +45,99 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LogIn({ setLogin, handleLogin }) {
+function LogIn({ currentUser, handleLogin, history }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  if (currentUser && currentUser.id) {
+    console.log("currentUser: ", currentUser);
+    return <Redirect to="/" />;
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      {/* <div className={classes.paper}> */}
-      {/* <Avatar className={classes.avatar}>
+      <div className={classes.paper}>
+        {/* <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar> */}
-      <Typography component="h1" variant="h5">
-        Log In
-      </Typography>
-      <form
-        className={classes.form}
-        noValidate
-        onSubmit={e => {
-          e.preventDefault();
-          console.log(email);
-          console.log(password);
-          handleLogin(email, password);
-        }}
-      >
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          onChange={e => setEmail(e.target.value)}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          onChange={e => setPassword(e.target.value)}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-        >
+        <Typography component="h1" variant="h5">
           Log In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
+        </Typography>
+        <form
+          className={classes.form}
+          noValidate
+          onSubmit={e => {
+            e.preventDefault();
+            console.log(email);
+            console.log(password);
+            handleLogin(email, password);
+            // history.push('/')
+          }}
+        >
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={e => setEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Log In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <NavLink to={`/auth/signup`}>
+                {"Don't have an account? Sign Up"}
+              </NavLink>
+            </Grid>
           </Grid>
-          <Grid item>
-            <NavLink to={`/auth/signup`}>
-              {"Don't have an account? Sign Up"}
-            </NavLink>
-          </Grid>
-        </Grid>
-      </form>
-      {/* </div> */}
+        </form>
+      </div>
     </Container>
   );
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store, ownProps) => {
+  console.log("ownProps: ", ownProps);
+  const { history } = ownProps;
+  const { currentUser } = store;
   return {
-    /* state that the component needs */
+    currentUser,
+    history
   };
 };
 
@@ -140,6 +150,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LogIn);
