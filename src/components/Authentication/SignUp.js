@@ -1,51 +1,52 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
 import { NavLink } from "react-router-dom";
+import { signupUser } from "../../redux/actions/actionCreators";
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.green,
-    },
+      backgroundColor: theme.palette.common.green
+    }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-export default function SignUp({ setLogin }) {
+const SignUp = ({ setLogin }) => {
   const classes = useStyles();
-  
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [username, setUsername] = useState('')
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   return (
     <Container component="main" maxWidth="xs">
@@ -69,7 +70,7 @@ export default function SignUp({ setLogin }) {
                 label="First Name"
                 id="firstName"
                 autoComplete="current-first-name"
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={e => setFirstName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,7 +83,7 @@ export default function SignUp({ setLogin }) {
                 label="Last Name"
                 id="lastName"
                 autoComplete="current-last-name"
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={e => setLastName(e.target.value)}
               />
             </Grid>
           </Grid>
@@ -96,7 +97,7 @@ export default function SignUp({ setLogin }) {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -108,7 +109,7 @@ export default function SignUp({ setLogin }) {
             name="username"
             autoComplete="username"
             autoFocus
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -120,7 +121,7 @@ export default function SignUp({ setLogin }) {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -132,11 +133,11 @@ export default function SignUp({ setLogin }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={async (e) => {
-              console.log(email)
-              console.log(password)
-              console.log(firstName)
-              console.log(lastName)
+            onClick={async e => {
+              console.log(email);
+              console.log(password);
+              console.log(firstName);
+              console.log(lastName);
               // console.log(await signup(email, username, password, firstName, lastName))
             }}
           >
@@ -150,7 +151,7 @@ export default function SignUp({ setLogin }) {
             </Grid>
             <Grid item>
               <NavLink to={`/auth/login`}>
-                  {"Already have an account? Log In"}
+                {"Already have an account? Log In"}
               </NavLink>
             </Grid>
           </Grid>
@@ -158,4 +159,17 @@ export default function SignUp({ setLogin }) {
       </div>
     </Container>
   );
-}
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSignup: (firstName, lastName, email, username, password) => {
+      dispatch(signupUser(firstName, lastName, email, username, password));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);
