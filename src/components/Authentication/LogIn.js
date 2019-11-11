@@ -13,7 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { connect } from 'react-redux'
+
 import { NavLink, useRouteMatch } from "react-router-dom";
+import { loginUser } from '../../redux/actions/actionCreators';
 
 // import login from '../redux/actions/auth/logInUser';
 
@@ -42,9 +45,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function LogIn({ setLogin }) {
+function LogIn({ setLogin, handleLogin }) {
   const classes = useStyles();
-  let { path, url } = useRouteMatch();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -58,7 +60,16 @@ export default function LogIn({ setLogin }) {
         <Typography component="h1" variant="h5">
           Log In
         </Typography>
-        <form className={classes.form} noValidate>
+        <form 
+          className={classes.form} 
+          noValidate
+          onSubmit={e => {
+            e.preventDefault()
+            console.log(email)
+            console.log(password)
+            handleLogin(email, password)
+          }}
+        >
           <TextField
             variant="outlined"
             margin="normal"
@@ -93,11 +104,6 @@ export default function LogIn({ setLogin }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={async (e) => {
-              console.log('email: ', email)
-              console.log('password: ', password)
-              // console.log(await login(email, password))
-            }}
           >
             Log In
           </Button>
@@ -118,3 +124,19 @@ export default function LogIn({ setLogin }) {
     </Container>
   );
 }
+
+const mapStateToProps = (store) => {
+  return {
+    
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin: (email, password) => {
+      dispatch(loginUser(email, password))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LogIn)
