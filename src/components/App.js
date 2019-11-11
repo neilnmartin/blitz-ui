@@ -15,7 +15,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* <p>b l i t z</p> */}
-        <span><img src="/favicon.ico" alt="blitz-logo"/>LITZ</span>
+        <span>
+          {/* <img src="/favicon.ico" alt="blitz-logo"/> */}
+          BLITZ
+        </span>
       </header>
       <Switch>
         <Route path="/auth">
