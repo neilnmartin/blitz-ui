@@ -50,11 +50,6 @@ function LogIn({ currentUser, handleLogin, history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  if (currentUser && currentUser.id) {
-    console.log("currentUser: ", currentUser);
-    return <Redirect to="/" />;
-  }
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -73,7 +68,7 @@ function LogIn({ currentUser, handleLogin, history }) {
             console.log(email);
             console.log(password);
             handleLogin(email, password);
-            // history.push('/')
+            history.replace('/')
           }}
         >
           <TextField

@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({ handleSignup }) => {
+const SignUp = ({ handleSignup, history }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -67,6 +67,7 @@ const SignUp = ({ handleSignup }) => {
             e.preventDefault()
             console.log(firstName, lastName, email, username, password)
             handleSignup(firstName, lastName, email, username, password)
+            history.replace('/')
           }}
         >
           <Grid container spacing={3}>

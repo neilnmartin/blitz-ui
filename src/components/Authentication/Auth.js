@@ -28,12 +28,8 @@ export default function Auth() {
     <div>
       {/* <Card> */}
         <Switch>
-          <Route exact path={`${path}/login`}>
-            <Login />
-          </Route>
-          <Route exact path={`${path}/signup`}>
-            <SignUp />
-          </Route>
+          <Route exact path={`${path}/login`} component={Login} />
+          <Route exact path={`${path}/signup`} component={SignUp} />
         </Switch>
       {/* </Card> */}
       <Box mt={8}>
