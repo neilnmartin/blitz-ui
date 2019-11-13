@@ -24,8 +24,8 @@ function App() {
         <Route path="/auth">
           <Auth />
         </Route>
-        <PrivateRoute path="/">
-          <Dashboard />
+        <PrivateRoute path="/" component={Dashboard}>
+          {/* <Dashboard /> */}
         </PrivateRoute>
       </Switch>
     </div>

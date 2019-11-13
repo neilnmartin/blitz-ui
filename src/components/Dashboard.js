@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import { connect } from "react-redux";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,12 +48,12 @@ const useStyles = makeStyles(theme => ({
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
-  submit: {
+  signout: {
     margin: theme.spacing(3, 0, 2),
   },
 }));
 
-export default function SignIn() {
+const Dashboard = ({ handleLogOut, history }) => {
   const classes = useStyles();
 
   return (
@@ -64,6 +66,18 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Welcome :)
         </Typography>
+        <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.signout}
+            onClick={() => {
+              handleLogOut()
+              history.replace('/auth/login')
+            }}
+            >
+            Log Out
+          </Button>
       </div>
       <Box mt={8}>
         <Copyright />
@@ -71,3 +85,17 @@ export default function SignIn() {
     </Container>
   );
 }
+
+const mapStateToProps = (store, ownProps) => {
+
+}
+
+const mapDispatchToProps = (store, ownProps) => {
+  return {
+    handleLogOut: () => {
+      localStorage.removeItem('access_token')
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
