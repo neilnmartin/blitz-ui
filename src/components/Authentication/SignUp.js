@@ -65,7 +65,6 @@ const SignUp = ({ handleSignup, history }) => {
           noValidate
           onSubmit={e => {
             e.preventDefault()
-            console.log(firstName, lastName, email, username, password)
             handleSignup(firstName, lastName, email, username, password)
             history.replace('/')
           }}

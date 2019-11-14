@@ -45,18 +45,27 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LogIn({ currentUser, handleLogin, history }) {
+function LogIn({ currentUser, handleLogin, loginHistory }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  if(currentUser && currentUser.id && localStorage.getItem('access_token')) {
+    console.log('currentUser: ', currentUser)
+    loginHistory.replace('/')
+  }
+
+  /* 
+    useEffect
+      => check if currentUser prop is passed
+      => check localStorage for 'access_token' 
+      => history.replace('/')
+  */
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
         <Typography component="h1" variant="h5">
           Log In
         </Typography>
@@ -65,10 +74,7 @@ function LogIn({ currentUser, handleLogin, history }) {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            console.log(email);
-            console.log(password);
             handleLogin(email, password);
-            history.replace('/')
           }}
         >
           <TextField
@@ -128,11 +134,13 @@ function LogIn({ currentUser, handleLogin, history }) {
 
 const mapStateToProps = (store, ownProps) => {
   console.log("ownProps: ", ownProps);
-  const { history } = ownProps;
-  const { currentUser } = store;
+  const { loginHistory } = ownProps;
+  const { currentUser } = store.loginReducer;
+  console.log('store mapstp',  store)
+  console.log('currentUser mapstp', currentUser)
   return {
     currentUser,
-    history
+    loginHistory
   };
 };
 

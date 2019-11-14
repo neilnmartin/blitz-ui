@@ -28,7 +28,11 @@ export default function Auth() {
     <div>
       {/* <Card> */}
         <Switch>
-          <Route exact path={`${path}/login`} component={Login} />
+          <Route exact path={`${path}/login`}>
+            {({ history }) => {
+              return <Login loginHistory={history}/> // render props pattern for custom prop names
+            }}
+          </Route>
           <Route exact path={`${path}/signup`} component={SignUp} />
         </Switch>
       {/* </Card> */}
