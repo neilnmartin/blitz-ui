@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const SignUp = ({ handleSignup, history }) => {
+const SignUp = ({ currentUser, handleSignup, history }) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
@@ -50,13 +50,15 @@ const SignUp = ({ handleSignup, history }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
+  if(currentUser && currentUser.id && localStorage.getItem('access_token')) {
+    console.log('currentUser: ', currentUser)
+    history.replace('/')
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        {/* <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar> */}
         <Typography component="h1" variant="h5">
           Create An Account
         </Typography>
@@ -66,7 +68,6 @@ const SignUp = ({ handleSignup, history }) => {
           onSubmit={e => {
             e.preventDefault()
             handleSignup(firstName, lastName, email, username, password)
-            history.replace('/')
           }}
         >
           <Grid container spacing={3}>
@@ -164,6 +165,15 @@ const SignUp = ({ handleSignup, history }) => {
   );
 };
 
+const mapStateToProps = (store, ownProps) => {
+  const { currentUser } = store.signupReducer
+  const { history } = ownProps
+  return {
+    currentUser,
+    history
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     handleSignup: (firstName, lastName, email, username, password) => {
@@ -173,6 +183,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(SignUp);

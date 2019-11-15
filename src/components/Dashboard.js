@@ -87,7 +87,12 @@ const Dashboard = ({ handleLogOut, history }) => {
 }
 
 const mapStateToProps = (store, ownProps) => {
-
+  const { currentUser } = store.loginReducer || store.signupReducer
+  const { history } = ownProps 
+  return {
+    currentUser,
+    history
+  }
 }
 
 const mapDispatchToProps = (store, ownProps) => {
