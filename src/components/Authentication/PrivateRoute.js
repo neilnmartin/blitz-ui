@@ -1,15 +1,11 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
   Route,
-  Link,
   Redirect,
-  useHistory,
-  useLocation
 } from "react-router-dom";
 
 export default function PrivateRoute({ children, ...rest}) {
+  console.log('access token: ', localStorage.getItem('access_token'))
   return (
     <Route
       {...rest}

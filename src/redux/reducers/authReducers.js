@@ -1,10 +1,11 @@
 import {
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
+  LOG_IN_FAILURE,
+  LOG_OUT,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-  LOG_OUT
 } from "../actions/actions";
 
 export const loginReducer = (
@@ -58,6 +59,7 @@ export const signupReducer = (
       });
     case SIGN_UP_SUCCESS:
       let { id, email, username, firstName, lastName } = action.signupUserData;
+      console.log(action.signupUserData)
       return Object.assign({}, state, {
         loading: false,
         currentUser: {
