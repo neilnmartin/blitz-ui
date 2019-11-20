@@ -22,6 +22,14 @@ export function loginSuccess(loginUserData) {
   };
 }
 
+export function loginFailure(error) {
+  return {
+    type: LOG_IN_FAILURE,
+    error,
+    receivedAt: Date.now()
+  };
+}
+
 export const loginUser = (email, password) => dispatch => {
   dispatch(loginRequest(email));
   axios
@@ -34,7 +42,10 @@ export const loginUser = (email, password) => dispatch => {
       localStorage.setItem("access_token", data.token);
       dispatch(loginSuccess(data.user));
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      dispatch(loginFailure(error))
+      console.error(error)
+    });
 };
 
 export const signupRequest = email => ({
@@ -46,6 +57,14 @@ export function signupSuccess(signupUserData) {
   return {
     type: SIGN_UP_SUCCESS,
     signupUserData,
+    receivedAt: Date.now()
+  };
+}
+
+export function signupFailure(error) {
+  return {
+    type: SIGN_UP_FAILURE,
+    error,
     receivedAt: Date.now()
   };
 }
@@ -71,7 +90,10 @@ export const signupUser = (
       localStorage.setItem("access_token", data.token);
       dispatch(signupSuccess(data.user));
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      dispatch(signupFailure(error))
+      console.error(error)
+    });
 };
 
 export const logOut = () => {
