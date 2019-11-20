@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LogIn({ currentUser, handleLogin, loginHistory }) {
+function LogIn({ currentUser, error, handleLogin, loginHistory }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,6 +68,7 @@ function LogIn({ currentUser, handleLogin, loginHistory }) {
         <Typography component="h1" variant="h5">
           Log In
         </Typography>
+        {error ? <p>{error.message}</p> : null}
         <form
           className={classes.form}
           noValidate
@@ -134,11 +135,12 @@ function LogIn({ currentUser, handleLogin, loginHistory }) {
 const mapStateToProps = (store, ownProps) => {
   console.log("ownProps: ", ownProps);
   const { loginHistory } = ownProps;
-  const { currentUser } = store.loginReducer;
+  const { currentUser, error } = store.loginReducer;
   console.log('store mapstp',  store)
   console.log('currentUser mapstp', currentUser)
   return {
     currentUser,
+    error,
     loginHistory
   };
 };
