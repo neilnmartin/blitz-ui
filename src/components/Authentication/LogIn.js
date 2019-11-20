@@ -51,7 +51,6 @@ function LogIn({ currentUser, handleLogin, loginHistory }) {
   const [password, setPassword] = useState("");
 
   if(currentUser && currentUser.id && localStorage.getItem('access_token')) {
-    console.log('currentUser: ', currentUser)
     loginHistory.replace('/')
   }
 
