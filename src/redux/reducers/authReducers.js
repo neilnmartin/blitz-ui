@@ -32,6 +32,11 @@ export const loginReducer = (
           lastName
         }
       });
+    case LOG_IN_FAILURE:
+      let error = action.error
+      return Object.assign({}, state, {
+        error: error
+      });
     case LOG_OUT: 
       return Object.assign({}, state, {
         loading: false,
@@ -69,6 +74,11 @@ export const signupReducer = (
           firstName,
           lastName
         }
+      });
+    case SIGN_UP_FAILURE:
+      let error = action.error
+      return Object.assign({}, state, {
+        error: error
       });
     default:
       return {
