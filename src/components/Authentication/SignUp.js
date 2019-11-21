@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -166,7 +165,7 @@ const SignUp = ({ currentUser, handleSignup, history }) => {
 };
 
 const mapStateToProps = (store, ownProps) => {
-  const { currentUser } = store.signupReducer
+  const { currentUser, error } = store.authReducer;
   const { history } = ownProps
   return {
     currentUser,
