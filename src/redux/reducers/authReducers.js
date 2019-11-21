@@ -8,15 +8,11 @@ import {
   SIGN_UP_FAILURE,
 } from "../actions/actions";
 
-export const authReducers = (
-    state = {
+const authReducer = ( state = {
       loading: false,
       currentUser: {}
     },
-    action
-  ) => {
-    let { id, email, username, firstName, lastName } = action.data;
-    let error = action.error;
+    action) => {
     switch (action.type) {
     case LOG_IN_REQUEST:
       return Object.assign({}, state, {
@@ -26,16 +22,16 @@ export const authReducers = (
       return Object.assign({}, state, {
         loading: false,
         currentUser: {
-          id,
-          email,
-          username,
-          firstName,
-          lastName
+          id: action.data.id,
+          email: action.data.email,
+          username: action.data.username,
+          firstName: action.data.firstName,
+          lastName: action.data.lastName
         }
       });
     case LOG_IN_FAILURE:
       return Object.assign({}, state, {
-        error: error
+        error: action.error
       });
     case LOG_OUT: 
       return Object.assign({}, state, {
@@ -51,16 +47,16 @@ export const authReducers = (
       return Object.assign({}, state, {
         loading: false,
         currentUser: {
-          id,
-          email,
-          username,
-          firstName,
-          lastName
+          id: action.data.id,
+          email: action.data.email,
+          username: action.data.username,
+          firstName: action.data.firstName,
+          lastName: action.data.lastName
         }
       });
     case SIGN_UP_FAILURE:
       return Object.assign({}, state, {
-        error: error
+        error: action.error
       });
     default:
       return {
@@ -69,6 +65,8 @@ export const authReducers = (
       };
   }
 }
+
+export default authReducer
 
 /* let storeStateSample = {
   loading: false,
