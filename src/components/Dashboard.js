@@ -1,58 +1,58 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
 import { connect } from "react-redux";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
+  "@global": {
     body: {
-      backgroundColor: theme.palette.common.green,
-    },
+      backgroundColor: theme.palette.common.green
+    }
   },
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
   },
   signout: {
-    margin: theme.spacing(3, 0, 2),
-  },
+    margin: theme.spacing(3, 0, 2)
+  }
 }));
 
-const Dashboard = ({ handleLogOut, history }) => {
+const Dashboard = ({ currentUser, handleLogOut, history }) => {
   const classes = useStyles();
 
   return (
@@ -63,19 +63,19 @@ const Dashboard = ({ handleLogOut, history }) => {
           <LockOutlinedIcon />
         </Avatar> */}
         <Typography component="h1" variant="h5">
-          Welcome :)
+          Welcome {currentUser.firstName}!
         </Typography>
         <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.signout}
-            onClick={() => {
-              handleLogOut()
-              history.replace('/auth/login')
-            }}
-            >
-            Log Out
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.signout}
+          onClick={() => {
+            handleLogOut();
+            history.replace("/auth/login");
+          }}
+        >
+          Log Out
         </Button>
       </div>
       <Box mt={8}>
@@ -83,23 +83,23 @@ const Dashboard = ({ handleLogOut, history }) => {
       </Box>
     </Container>
   );
-}
+};
 
 const mapStateToProps = (store, ownProps) => {
-  const { currentUser } = store.loginReducer || store.signupReducer
-  const { history } = ownProps 
+  const { currentUser } = store.authReducer;
+  const { history } = ownProps;
   return {
     currentUser,
     history
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (store, ownProps) => {
   return {
     handleLogOut: () => {
-      localStorage.removeItem('access_token')
+      localStorage.removeItem("access_token");
     }
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
