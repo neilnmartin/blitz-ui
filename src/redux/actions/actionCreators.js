@@ -14,10 +14,10 @@ export const loginRequest = email => ({
   email
 });
 
-export function loginSuccess(loginUserData) {
+export function loginSuccess(data) {
   return {
     type: LOG_IN_SUCCESS,
-    loginUserData,
+    data,
     receivedAt: Date.now()
   };
 }
@@ -53,10 +53,10 @@ export const signupRequest = email => ({
   email
 });
 
-export function signupSuccess(signupUserData) {
+export function signupSuccess(data) {
   return {
     type: SIGN_UP_SUCCESS,
-    signupUserData,
+    data,
     receivedAt: Date.now()
   };
 }
