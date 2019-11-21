@@ -8,20 +8,21 @@ import {
   SIGN_UP_FAILURE,
 } from "../actions/actions";
 
-export const loginReducer = (
-  state = {
-    loading: false,
-    currentUser: {}
-  },
-  action
-) => {
-  switch (action.type) {
+export const authReducers = (
+    state = {
+      loading: false,
+      currentUser: {}
+    },
+    action
+  ) => {
+    let { id, email, username, firstName, lastName } = action.data;
+    let error = action.error;
+    switch (action.type) {
     case LOG_IN_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
     case LOG_IN_SUCCESS:
-      let { id, email, username, firstName, lastName } = action.loginUserData;
       return Object.assign({}, state, {
         loading: false,
         currentUser: {
@@ -33,7 +34,6 @@ export const loginReducer = (
         }
       });
     case LOG_IN_FAILURE:
-      let error = action.error
       return Object.assign({}, state, {
         error: error
       });
@@ -42,28 +42,11 @@ export const loginReducer = (
         loading: false,
         currentUser: {}
       })
-    default:
-      return {
-        loading: false,
-        currentUser: {}
-      };
-  }
-};
-
-export const signupReducer = (
-  state = {
-    loading: false,
-    currentUser: {}
-  },
-  action
-) => {
-  switch (action.type) {
     case SIGN_UP_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
     case SIGN_UP_SUCCESS:
-      let { id, email, username, firstName, lastName } = action.signupUserData;
       console.log(action.signupUserData)
       return Object.assign({}, state, {
         loading: false,
@@ -76,7 +59,6 @@ export const signupReducer = (
         }
       });
     case SIGN_UP_FAILURE:
-      let error = action.error
       return Object.assign({}, state, {
         error: error
       });
@@ -86,7 +68,7 @@ export const signupReducer = (
         currentUser: {}
       };
   }
-};
+}
 
 /* let storeStateSample = {
   loading: false,
