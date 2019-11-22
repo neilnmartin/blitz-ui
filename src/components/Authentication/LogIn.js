@@ -15,8 +15,6 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { loginUser } from "../../redux/actions/actionCreators";
 
-// import login from '../redux/actions/auth/logInUser';
-
 const useStyles = makeStyles(theme => ({
   "@global": {
     body: {
@@ -34,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1)
   },
   submit: {
@@ -42,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LogIn({ currentUser, error, handleLogin, loginHistory }) {
+function LogIn({ currentUser, error, dispatch, loginHistory }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -71,7 +69,7 @@ function LogIn({ currentUser, error, handleLogin, loginHistory }) {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            handleLogin(email, password);
+            dispatch(loginUser(email, password));
           }}
         >
           <TextField
@@ -130,11 +128,8 @@ function LogIn({ currentUser, error, handleLogin, loginHistory }) {
 }
 
 const mapStateToProps = (store, ownProps) => {
-  console.log("ownProps: ", ownProps);
   const { loginHistory } = ownProps;
   const { currentUser, error } = store.authReducer;
-  console.log('store mapstp',  store)
-  console.log('currentUser mapstp', currentUser)
   return {
     currentUser,
     error,
@@ -142,13 +137,7 @@ const mapStateToProps = (store, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleLogin: (email, password) => {
-      dispatch(loginUser(email, password));
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({ dispatch })
 
 export default connect(
   mapStateToProps,
