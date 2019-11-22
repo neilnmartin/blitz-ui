@@ -13,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { logOut } from "../redux/actions/actionCreators";
 
 function Copyright() {
   return (
@@ -52,9 +54,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Dashboard = ({ currentUser, handleLogOut, history }) => {
+const Dashboard = ({ currentUser, dispatch }) => {
   const classes = useStyles();
-
+  const history = useHistory()
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -71,7 +73,7 @@ const Dashboard = ({ currentUser, handleLogOut, history }) => {
           color="primary"
           className={classes.signout}
           onClick={() => {
-            handleLogOut();
+            dispatch(logOut)
             history.replace("/auth/login");
           }}
         >
@@ -94,12 +96,6 @@ const mapStateToProps = (store, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (store, ownProps) => {
-  return {
-    handleLogOut: () => {
-      localStorage.removeItem("access_token");
-    }
-  };
-};
+const mapDispatchToProps = (dispatch) => ({ dispatch })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
