@@ -90,12 +90,10 @@ const Dashboard = ({ currentUser, dispatch }) => {
 const mapStateToProps = (store, ownProps) => {
   const { currentUser } = store.authReducer;
   const { history } = ownProps;
-  return {
-    currentUser,
-    history
-  };
+  return { currentUser, history };
 };
 
-const mapDispatchToProps = (dispatch) => ({ dispatch })
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+  mapStateToProps,
+  (dispatch) => ({ dispatch })
+)(Dashboard);
