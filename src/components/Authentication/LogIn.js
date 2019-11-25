@@ -137,9 +137,7 @@ const mapStateToProps = (store, ownProps) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({ dispatch })
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  dispatch => ({ dispatch })
 )(LogIn);
