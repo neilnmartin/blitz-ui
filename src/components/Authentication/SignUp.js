@@ -173,15 +173,7 @@ const mapStateToProps = (store, ownProps) => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleSignup: (firstName, lastName, email, username, password) => {
-      dispatch(signupUser(firstName, lastName, email, username, password));
-    }
-  };
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  dispatch => ({ dispatch })
 )(SignUp);
